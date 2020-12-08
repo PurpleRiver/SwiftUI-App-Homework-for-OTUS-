@@ -1,18 +1,16 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  SwiftUI App(Homework for OTUS)
 //
-//  Created by Blurry Rabbit on 05.12.2020.
+//  Created by Идель Юсупов on 05.12.2020.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     
     @State private var switchTab = 0
     @State var isModal: Bool = false
-    
-    var listOfNames = ["Fry", "Bender", "Lila", "Amy", "Professor"]
     
     var body: some View {
         TabView(selection: $switchTab) {
@@ -57,7 +55,6 @@ struct ContentView: View {
             NavigationView {
                 List(listOfNames, id: \.self) { names in
                     CustomRow(content: names)
-                        .buttonStyle(PlainButtonStyle())
                 }
                 .navigationBarTitle(Text("Futurama Character"))
             }
@@ -113,35 +110,7 @@ struct ContentView: View {
 
 struct Preview: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RootView()
     }
 }
 
-struct CustomRow: View {
-    var content: String
-    var body: some View {
-        HStack {
-            Image(content)
-                .resizable()
-                .frame(width: 100, height: 100, alignment: .center)
-                .cornerRadius(50)
-                .background(
-                    RoundedRectangle(cornerRadius: 50)
-                        .stroke(Color.green, lineWidth: 5))
-                .aspectRatio(contentMode: .fit)
-            NavigationLink(destination:
-                            Image(content)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .navigationBarTitle(Text(content)))
-            {
-                Text(content)
-                    .foregroundColor(.white)
-                    .padding(5)
-                    .background(Color.green)
-                    .cornerRadius(8)
-            }
-            Spacer()
-        }
-    }
-}
